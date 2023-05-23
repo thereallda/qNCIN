@@ -1,0 +1,7 @@
+"id","condition","replicate"
+"Y1_CRNT","Input",1
+"Y2_CRNT","Input",2
+"Y3_CRNT","Input",3
+"Y1_YCNT","Enrich",1
+"Y2_YCNT","Enrich",2
+"Y3_YCNT","Enrich",3
