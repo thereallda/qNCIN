@@ -15,7 +15,7 @@
 #' @importFrom scales percent
 synScatter <- function(ratio.df, syn.meta) {
 
-  ratio_long <- ratio.df[grep("syn", rownames(ratio.df)),] %>%
+  ratio_long <- ratio.df[syn.meta$id,] %>%
     as.data.frame() %>%
     tibble::rownames_to_column("id") %>%
     tidyr::pivot_longer(cols = -id,

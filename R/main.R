@@ -54,6 +54,8 @@ calcScaleFactor <- function(data,
 #' @param scale.factor Vector of scale factors generated from \code{calcScaleFactor}.
 #' @param prop.top.enrich Proportion of top-enriched genes to used for
 #' adjustment of non-specific enrichment, default used all genes.
+#' @param top.down Whether using top-to-down or down-to-top enriched gens for
+#' the adjustment of non-specific enrichment, default: TRUE (top-down)
 #' @param pseudo.count A numeric scalar of pseudo-counts to be added to each gene, default: 1.
 #'
 #' @return Vector of adjust factors
@@ -68,6 +70,7 @@ calcAdjustFactor <- function(data,
                              enrich.id = "Enrich",
                              scale.factor,
                              prop.top.enrich = 1,
+                             top.down = TRUE,
                              pseudo.count = 1) {
   # initialize parameters
   input.idx <- grep(input.id, enrich.group)
@@ -94,7 +97,7 @@ calcAdjustFactor <- function(data,
   neg_all <- cbind(neg_all, neg_avg)
 
   # order neg based on their average in decreasing
-  neg_all <- neg_all[order(neg_all[,"neg_avg"], decreasing = TRUE),]
+  neg_all <- neg_all[order(neg_all[,"neg_avg"], decreasing = top.down),]
 
   # used prop.top.enrich of non-specific enriched genes for adjustment
   neg_all <- utils::head(neg_all, n = floor(nrow(neg_all)*prop.top.enrich))
