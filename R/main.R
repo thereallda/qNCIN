@@ -92,7 +92,7 @@ calcAdjustFactor <- function(data,
   eratio_df <- counts_sam_scale[,enrich.idx]/counts_sam_scale[,input.idx]
 
   # get all non-specific enriched genes based on empirical ratio
-  neg_all <- eratio_df[rowSums(eratio_df>1) == ncol(eratio_df),]
+  neg_all <- eratio_df[rowSums(eratio_df>1) > 0.7*ncol(eratio_df),]
   neg_avg <- rowMeans(neg_all)
   neg_all <- cbind(neg_all, neg_avg)
 
